@@ -4,7 +4,7 @@ import { reset as resetForm, initialize } from 'redux-form'
 import { showTabs, selectTab } from '../common/tab/tabActions'
 
 const BASE_URL = 'http://localhost:3003/api'
-const INITIAL_VALUES = {}
+const INITIAL_VALUES = { credits: [{}], debts: [{}] }
 
 export function init() {
     return [
@@ -31,10 +31,22 @@ export function update(values) {
     return submit(values, 'put')
 }
 
+export function remove(values) {
+    return submit(values, 'delete')
+}
+
 export function showUpdate(billingCycle) {
     return [
         showTabs('tabUpdate'),
         selectTab('tabUpdate'),
+        initialize('billingCycleForm', billingCycle)
+    ]
+}
+
+export function showDelete(billingCycle) {
+    return [
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
         initialize('billingCycleForm', billingCycle)
     ]
 }
